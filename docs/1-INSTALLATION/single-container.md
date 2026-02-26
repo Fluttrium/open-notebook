@@ -62,11 +62,18 @@ Then configure your AI provider:
 5. Open the app → Go to **Settings → API Keys** to configure your AI provider
 
 **Railway:**
-1. Create new project
-2. Add `lfnovo/open_notebook:v1-latest-single`
-3. Set environment variables (at minimum: `OPEN_NOTEBOOK_ENCRYPTION_KEY`)
-4. Deploy
-5. Open the app → Go to **Settings → API Keys** to configure your AI provider
+1. Fork the [repository](https://github.com/lfnovo/open-notebook) to your GitHub account
+2. Create a new project in Railway → **New Service** → **GitHub Repo** → select the fork
+3. Railway auto-detects `railway.toml` and builds from `Dockerfile.single`
+4. Add a **Volume** mounted at `/data` (for database and uploads persistence)
+5. Set environment variables:
+   - `OPEN_NOTEBOOK_ENCRYPTION_KEY` = a secret string (required)
+   - `SURREAL_PASSWORD` = a strong password (recommended to change from default)
+   - `RAILWAY_RUN_UID` = `0` (required for volume permissions)
+6. Deploy — Railway assigns a public URL automatically
+7. Open the app → Go to **Settings → API Keys** to configure your AI provider
+
+> **Note:** Railway exposes one port per service. The frontend handles all traffic and proxies API calls internally. `API_URL` is auto-configured from `RAILWAY_PUBLIC_DOMAIN`.
 
 **Render:**
 1. Create new Web Service
