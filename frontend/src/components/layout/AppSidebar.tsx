@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { usePathname } from 'next/navigation'
 
 import { cn } from '@/lib/utils'
@@ -120,30 +119,17 @@ export function AppSidebar() {
         >
           {isCollapsed ? (
             <div className="relative flex items-center justify-center w-full">
-              <Image
-                src="/logo.svg"
-                alt="Open Notebook"
-                width={32}
-                height={32}
-                className="transition-opacity group-hover:opacity-0"
-              />
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={toggleCollapse}
-                className="absolute text-sidebar-foreground hover:bg-sidebar-accent opacity-0 group-hover:opacity-100 transition-opacity"
+                className="text-sidebar-foreground hover:bg-sidebar-accent"
               >
                 <Menu className="h-4 w-4" />
               </Button>
             </div>
           ) : (
-            <>
-              <div className="flex items-center gap-2">
-                <Image src="/logo.svg" alt={t.common.appName} width={32} height={32} />
-                <span className="text-base font-medium text-sidebar-foreground">
-                  {t.common.appName}
-                </span>
-              </div>
+            <div className="flex items-center justify-end w-full">
               <Button
                 variant="ghost"
                 size="sm"
@@ -153,7 +139,7 @@ export function AppSidebar() {
               >
                 <ChevronLeft className="h-4 w-4" />
               </Button>
-            </>
+            </div>
           )}
         </div>
 
